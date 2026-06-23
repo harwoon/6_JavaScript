@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+    <script>
+        /*
+
+        localStorage
+        - 브라우저가 제공하는 웹 스토리지 기능 중 하나로, 자바스크립트를 통해 키/값 형태의 데이터를 부라우저에 영구적으로 저장할 수 있는 저장소
+        - 브라우저별로 약 5MB 내외 저장 제한이 있음(string으로 5MB 채우기 쉽지 않음)
+        - 문자열만 저장 가능
+        - 같은 도메인에서만 접근 가능
+        - 민감한 정보(비밀번호, 토큰 등)는 저장하면 안된다.(열어볼 수 있기 때문)
+
+
+        데이터 저장
+        localStorage.setItem("키","값")
+
+        데이터 불러오기
+        const value = localStorage.getItem("키")
+
+        데이터 삭제/모든 데이터 삭제
+        localStorage.removeItem("키")
+        localStorage.clear()
+
+
+        */
+
+        /*
+        데이터 전달용 언어
+        xml 태그를 사용해 json보다 좀 더 복잡함
+        json
+        */
+
+    </script>
+
+    <style>
+        :root {
+            --main-color: #ffffff;
+            --main-backcolor: #fafafa;
+            --font-color: black;
+        }
+
+        [data-theme="dark"] {
+            --main-color: #2b3843;
+            --main-backcolor: #212e37;
+            --font-color: white;
+        }
+
+        [data-theme="light"] {
+            --main-color: #ffffff;
+            --main-backcolor: #fafafa;
+            --font-color: black;
+        }
+
+        body {
+            background-color: var(--main-backcolor);
+            color: var(--font-color);
+        }
+    </style>
+</head>
+
+<body id="body">
+    <button onclick="saveUser()">사용자 저장</button>
+    <button onclick="loadUser()">사용자 불러오기</button>
+
+    <div id="info" style="margin-top: 10px;"></div>
+
+    <script>
+        function saveUser() {
+            const user = { name: "김사과", age: 20, job: "개발자" } //json과 형태 유사해보이지만 문자열 아니고 객체임
+
+            localStorage.setItem("user", JSON.stringify(user))//json형태 문자열로 바꿔줌
+        }
+
+        function loadUser() {
+            const data = localStorage.getItem("user")
+            if (data) {
+                const user = JSON.parse(data) //Json객체로 바꿈
+                document.getElementById("info").innerText = `이름: ${user.name}, 나이: ${user.age}, 직업: ${user.job}`
+            }
+        }
+
+    </script>
+</body>
+
+</html>
